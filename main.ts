@@ -1,19 +1,24 @@
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
-    info.changeScoreBy(1)
-    if (info.score() == 1) {
-        game.gameOver(true)
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     info.setScore(0)
-    game.reset()
-    game.gameOver(false)
+    if (info.score() == 0) {
+        game.gameOver(false)
+        game.reset()
+    }
 })
 function doSomething () {
     if (info.score() == 1) {
-    	
+        list = [tilemap`level2`, tilemap`level4`]
+        tiles.setCurrentTilemap(list._pickRandom())
+    }
+    if (info.score() == 3) {
+        game.gameOver(true)
     }
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
+    info.changeScoreBy(1)
+    doSomething()
+})
+let list: tiles.TileMapData[] = []
 tiles.setCurrentTilemap(tilemap`level1`)
 let mySprite = sprites.create(img`
     . . . . . f f f f . . . . . 
@@ -34,6 +39,6 @@ let mySprite = sprites.create(img`
     . . . . f f b b f f . . . . 
     `, SpriteKind.Player)
 scene.cameraFollowSprite(mySprite)
-tiles.placeOnTile(mySprite, tiles.getTileLocation(3, 1))
+tiles.placeOnTile(mySprite, tiles.getTileLocation(18, 23))
 controller.moveSprite(mySprite, 100, 100)
 info.startCountdown(50)
