@@ -28,6 +28,25 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let list: tiles.TileMapData[] = []
 let mySprite: Sprite = null
+game.setDialogFrame(img`
+    f f f f f f f f f f f f f f f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f d d d d d d d d d d d d d f 
+    f f f f f f f f f f f f f f f 
+    `)
+game.setDialogTextColor(15)
+game.showLongText("This is a maze with obstacles along the way. Avoid the red blocks and snakes. Find the green tile to proceed to the next maze. You win when you complete 3 mazes. ", DialogLayout.Full)
 info.startCountdown(60)
 info.setScore(0)
 tiles.setCurrentTilemap(tilemap`level1`)
