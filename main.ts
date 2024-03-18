@@ -1,3 +1,4 @@
+// This part of my code was inspired by this video: https://www.youtube.com/watch?v=zbevalNSDb0
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     game.gameOver(false)
     game.reset()
@@ -16,7 +17,7 @@ function tilemapChange (list: tiles.TileMapData[]) {
         game.gameOver(true)
         game.reset()
     }
-    tiles.placeOnRandomTile(mySprite, sprites.castle.tilePath5)
+    tiles.placeOnRandomTile(goodSprite, sprites.castle.tilePath5)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     info.changeScoreBy(1)
@@ -27,7 +28,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     game.reset()
 })
 let list: tiles.TileMapData[] = []
-let mySprite: Sprite = null
+let goodSprite: Sprite = null
 game.setDialogTextColor(15)
 game.setDialogFrame(img`
     f f f f f f f f f f f f f f f 
@@ -50,7 +51,7 @@ game.showLongText("This is a maze game with obstacles. Avoid the red blocks and 
 info.startCountdown(60)
 info.setScore(0)
 tiles.setCurrentTilemap(tilemap`level1`)
-mySprite = sprites.create(img`
+goodSprite = sprites.create(img`
     . . . . . f f f f . . . . . 
     . . . f f e e e e f f . . . 
     . . f e e e e e e e e f . . 
@@ -68,7 +69,7 @@ mySprite = sprites.create(img`
     . . f f 3 b 3 b 3 3 f f . . 
     . . . . f f b b f f . . . . 
     `, SpriteKind.Player)
-let badguy = sprites.create(img`
+let badSprite = sprites.create(img`
     . . . . . c c c c c c c . . . . 
     . . . . c 6 7 7 7 7 7 6 c . . . 
     . . . c 7 c 6 6 6 6 c 7 6 c . . 
@@ -86,12 +87,13 @@ let badguy = sprites.create(img`
     . f 6 1 1 1 1 1 6 6 6 6 c . . . 
     . . f f c c c c c c c c . . . . 
     `, SpriteKind.Enemy)
-scene.cameraFollowSprite(mySprite)
-tiles.placeOnRandomTile(mySprite, sprites.castle.tilePath5)
-controller.moveSprite(mySprite, 100, 100)
+scene.cameraFollowSprite(goodSprite)
+// This part of my code was inspired by this video: https://www.youtube.com/watch?v=zbevalNSDb0
+tiles.placeOnRandomTile(goodSprite, sprites.castle.tilePath5)
+controller.moveSprite(goodSprite, 100, 100)
 list = [tilemap`level2`, tilemap`level4`, tilemap`level11`]
 for (let index = 0; index < 2; index++) {
-    badguy = sprites.create(img`
+    badSprite = sprites.create(img`
         . . . . . c c c c c c c . . . . 
         . . . . c 6 7 7 7 7 7 6 c . . . 
         . . . c 7 c 6 6 6 6 c 7 6 c . . 
@@ -109,9 +111,9 @@ for (let index = 0; index < 2; index++) {
         . f 6 1 1 1 1 1 6 6 6 6 c . . . 
         . . f f c c c c c c c c . . . . 
         `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(badguy, sprites.castle.tileGrass2)
+    tiles.placeOnRandomTile(badSprite, sprites.castle.tileGrass2)
     animation.runImageAnimation(
-    badguy,
+    badSprite,
     [img`
         . . . . . c c c c c c c . . . . 
         . . . . c 6 7 7 7 7 7 6 c . . . 
